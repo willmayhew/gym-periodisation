@@ -1,5 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\GymPeriodisation.Application\GymPeriodisation.Application.csproj" />
+    <ProjectReference Include="..\GymPeriodisation.Domain\GymPeriodisation.Domain.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
