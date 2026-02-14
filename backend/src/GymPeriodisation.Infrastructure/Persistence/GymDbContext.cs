@@ -11,6 +11,7 @@ public class GymDbContext : DbContext
     public DbSet<Workout> Workouts => Set<Workout>();
     public DbSet<Exercise> Exercises => Set<Exercise>();
     public DbSet<WorkoutSet> WorkoutSets => Set<WorkoutSet>();
+    public DbSet<Muscle> Muscles => Set<Muscle>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,5 +21,10 @@ public class GymDbContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
+
+        modelBuilder.Entity<Exercise>()
+            .HasMany(e => e.MuscleGroups)
+            .WithMany(m => m.Exercises)
+            .UsingEntity(j => j.ToTable("ExerciseMuscles"));
     }
 }

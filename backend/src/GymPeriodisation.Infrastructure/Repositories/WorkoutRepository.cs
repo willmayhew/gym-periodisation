@@ -27,4 +27,18 @@ public class WorkoutRepository : IWorkoutRepository
             .Include(w => w.Sets)
             .ToListAsync();
     }
+
+    public async Task<Workout?> GetByIdAsync(int workoutId)
+    {
+        return await _context.Workouts
+            .Where(w => w.Id == workoutId)
+            .Include(w => w.Sets)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
+    }
+
 }

@@ -4,6 +4,7 @@ using GymPeriodisation.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GymPeriodisation.Infrastructure.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260214182058_AddMuscle")]
+    partial class AddMuscle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace GymPeriodisation.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ExerciseMuscle", b =>
-                {
-                    b.Property<int>("ExercisesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MuscleGroupsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ExercisesId", "MuscleGroupsId");
-
-                    b.HasIndex("MuscleGroupsId");
-
-                    b.ToTable("ExerciseMuscles", (string)null);
-                });
 
             modelBuilder.Entity("GymPeriodisation.Domain.Entities.Exercise", b =>
                 {
@@ -82,19 +70,8 @@ namespace GymPeriodisation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("DateEnded")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateStarted")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -146,28 +123,18 @@ namespace GymPeriodisation.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("ExerciseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExerciseId");
+
                     b.ToTable("Muscles");
-                });
-
-            modelBuilder.Entity("ExerciseMuscle", b =>
-                {
-                    b.HasOne("GymPeriodisation.Domain.Entities.Exercise", null)
-                        .WithMany()
-                        .HasForeignKey("ExercisesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Muscle", null)
-                        .WithMany()
-                        .HasForeignKey("MuscleGroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("GymPeriodisation.Domain.Entities.Workout", b =>
@@ -200,8 +167,17 @@ namespace GymPeriodisation.Infrastructure.Migrations
                     b.Navigation("Workout");
                 });
 
+            modelBuilder.Entity("Muscle", b =>
+                {
+                    b.HasOne("GymPeriodisation.Domain.Entities.Exercise", null)
+                        .WithMany("MuscleGroups")
+                        .HasForeignKey("ExerciseId");
+                });
+
             modelBuilder.Entity("GymPeriodisation.Domain.Entities.Exercise", b =>
                 {
+                    b.Navigation("MuscleGroups");
+
                     b.Navigation("WorkoutSets");
                 });
 

@@ -1,4 +1,7 @@
-﻿using GymPeriodisation.Application.Interfaces;
+﻿using GymPeriodisation.Application.DTOs.Users;
+using GymPeriodisation.Application.Interfaces;
+using GymPeriodisation.Application.ServiceInterfaces;
+using GymPeriodisation.Application.Services;
 using GymPeriodisation.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,24 +11,24 @@ namespace GymPeriodisation.Api.Controllers
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await _userRepository.GetAllAsync();
+            var users = await _userService.GetUsers();
             return Ok(users);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserDto user)
         {
-            await _userRepository.AddAsync(user);
+            await _userService.CreateUser(user);
             return Ok(user);
         }
     }

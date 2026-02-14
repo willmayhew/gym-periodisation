@@ -4,6 +4,7 @@
     <Project Path="src/GymPeriodisation.Application/GymPeriodisation.Application.csproj" />
     <Project Path="src/GymPeriodisation.Domain/GymPeriodisation.Domain.csproj" />
     <Project Path="src/GymPeriodisation.Infrastructure/GymPeriodisation.Infrastructure.csproj" />
+    <Project Path="src/GymPeriodisation.Seeder/GymPeriodisation.Seeder.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/GymPeriodisation.Tests/GymPeriodisation.Tests.csproj" />
