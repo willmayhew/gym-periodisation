@@ -1,2 +1,8 @@
 <Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GymPeriodisation.Api/GymPeriodisation.Api.csproj" />
+    <Project Path="src/GymPeriodisation.Application/GymPeriodisation.Application.csproj" />
+    <Project Path="src/GymPeriodisation.Domain/GymPeriodisation.Domain.csproj" />
+    <Project Path="src/GymPeriodisation.Infrastructure/GymPeriodisation.Infrastructure.csproj" />
+  </Folder>
 </Solution>
