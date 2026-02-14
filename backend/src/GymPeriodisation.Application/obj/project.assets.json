@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net10.0": {}
+    "net10.0": {
+      "GymPeriodisation.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/GymPeriodisation.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GymPeriodisation.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "GymPeriodisation.Domain/1.0.0": {
+      "type": "project",
+      "path": "../GymPeriodisation.Domain/GymPeriodisation.Domain.csproj",
+      "msbuildProject": "../GymPeriodisation.Domain/GymPeriodisation.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net10.0": []
+    "net10.0": [
+      "GymPeriodisation.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\willi\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Stuff\\Documents\\Projects\\gym-periodisation\\backend\\src\\GymPeriodisation.Domain\\GymPeriodisation.Domain.csproj": {
+              "projectPath": "D:\\Stuff\\Documents\\Projects\\gym-periodisation\\backend\\src\\GymPeriodisation.Domain\\GymPeriodisation.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
